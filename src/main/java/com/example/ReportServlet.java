@@ -53,6 +53,7 @@ public class ReportServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 	//resp.setContentType("application/json");
+	PrintWriter out=res.getWriter();
 	String n1=req.getParameter("sdate");
 	String n2=req.getParameter("edate");
 	out.println(n1);
