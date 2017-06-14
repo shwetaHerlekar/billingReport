@@ -57,7 +57,7 @@ public class ReportServlet extends HttpServlet {
 	String n1=req.getParameter("sdate");
 	String n2=req.getParameter("edate");
 	n1 = "2017-05-31";
-	n2 = "2017-06-14"
+	n2 = "2017-06-14";
 	//out.println(n1);
 	//out.println(n2);
         try{
