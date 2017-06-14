@@ -17,11 +17,27 @@ http.open("GET", "report", true);
 		
 http.send();
 
+var am=parseFloat(data.amounts[0])/500.00*100;
+var div1 = document.createElement("div");
+div1.setAttribute("class", "progress");
+div1.style.width="300px";
+div1.style.height = "10px";
 
+var div = document.createElement("div");
+div.setAttribute("class", "progress-bar");
+div.setAttribute("role", "progressbar");
+div.setAttribute("aria-valuenow", am.toString());
+div.setAttribute("aria-valuemin", "0");
+div.setAttribute("area-valuemax", "500");
+div.style.width = am.toString();
+div.style.height = "10px";
+div1.appendChild(div);
+
+document.getElementById("main").appendChild(div1);
 
 }
 
-function addProgressBar(var perc, var div_name)
+/*function addProgressBar(var perc, var div_name)
 {
 	var div1 = document.createElement("div");
 	div1.setAttribute("class", "progress");
@@ -49,4 +65,4 @@ function createElement(var p_name, var val, var i)
 	document.getElementById("main").appendChild(div1);
 	var am=parseFloat(val)/500.00*100;
 	addProgressBar(am.toString(),"div"+i.toString());
-}
+}*/
