@@ -22,7 +22,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 @SuppressWarnings("serial")
-public class ReportServlet extends HttpServlet {
+public class QueryServlet extends HttpServlet {
         
     public QueryResult queryBigquery(BigQuery bigquery,String val) throws Exception
         {
