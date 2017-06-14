@@ -1,4 +1,4 @@
-var data;
+var jresp,data;
 google.charts.load("current", {packages:["corechart"]});
 window.onload = function(){
 var http = new XMLHttpRequest();
@@ -7,9 +7,9 @@ http.open("GET", "report", true);
 		//Send the proper header information along with the request
 		http.onreadystatechange = function() {//Call a function when the state changes.
 			if(http.readyState == 4 && http.status == 200) {
-				data = JSON.parse(http.responseText);
-				alert(data.credit);
-				alert(data.amounts);
+				jresp = JSON.parse(http.responseText);
+				alert(jresp.credit);
+				alert(jresp.amounts);
 				google.charts.setOnLoadCallback(drawChart);
 			}
 		}
@@ -25,9 +25,9 @@ function drawChart() {
 		data.addColumn('string', '{ role: "annotation" }');
 		
 		var i;
-		for(i=0;i<data.amounts.length;i++)
+		for(i=0;i<jresp.amounts.length;i++)
 		{
-				data.addRow([data.names[i],parseFloat(data.amounts[i]),data.amounts[i]]);
+				data.addRow([jresp.names[i],parseFloat(jresp.amounts[i]),jresp.amounts[i]]);
 		}
 		
 		var options = {
