@@ -58,7 +58,6 @@ public class ReportServlet extends HttpServlet {
 	String n2=req.getParameter("edate");
 	out.println(n1);
 	out.println(n2);
-    PrintWriter out = resp.getWriter();
         try{
         BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 		String query =  "SELECT "
