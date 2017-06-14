@@ -1,12 +1,13 @@
 window.onload = function(){
 alert("In chart js");
+var data;
 var http = new XMLHttpRequest();
 http.open("GET", "report", true);
 
 		//Send the proper header information along with the request
 		http.onreadystatechange = function() {//Call a function when the state changes.
 			if(http.readyState == 4 && http.status == 200) {
-				 var data = JSON.parse(http.responseText);
+				 data = JSON.parse(http.responseText);
 				 var i;
 				 for(i=0;i<data.names.length;i++)
 				 {
@@ -17,6 +18,7 @@ http.open("GET", "report", true);
 		
 http.send();
 
+alert(data.amounts);
 var am=parseFloat(data.amounts[0])/500.00*100;
 var div1 = document.createElement("div");
 div1.setAttribute("class", "progress");
