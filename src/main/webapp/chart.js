@@ -22,12 +22,11 @@ function drawChart() {
 		data = new google.visualization.DataTable();
 		data.addColumn('string', 'Project Name');
 		data.addColumn('number', 'Amount spent');
-		data.addColumn('string', '{ role: "annotation" }');
 		
 		var i;
 		for(i=0;i<jresp.amounts.length;i++)
 		{
-				data.addRow([jresp.names[i],parseFloat(jresp.amounts[i]),jresp.amounts[i]]);
+				data.addRow([jresp.names[i],parseFloat(jresp.amounts[i])]);
 		}
 		
 		var options = {
