@@ -8,8 +8,6 @@ http.open("GET", "report", true);
 		http.onreadystatechange = function() {//Call a function when the state changes.
 			if(http.readyState == 4 && http.status == 200) {
 				jresp = JSON.parse(http.responseText);
-				alert(jresp.credit);
-				alert(jresp.amounts);
 				google.charts.setOnLoadCallback(drawChart);
 			}
 		}
@@ -26,9 +24,11 @@ function drawChart() {
 		var i;
 		for(i=0;i<jresp.amounts.length;i++)
 		{
-				data.addRow([jresp.names[i],parseFloat(jresp.amounts[i])]);
+				alert(jresp.names[i]);
+				alert(parseFloat(jresp.amounts[i]));
+				data.addRow([jresp.names[i].toString(),parseFloat(jresp.amounts[i])]);
 		}
-		
+		alert(data)
 		var options = {
           title: 'Amount spent till today on each project',
           legend: { position: 'bottom' },
