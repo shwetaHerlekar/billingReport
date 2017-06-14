@@ -175,7 +175,7 @@ public class ReportServlet extends HttpServlet {
 		}
 		mobj.put("names", p_names);
 		mobj.put("amounts", am_spent);
-		mobj.put("credit", Math.round(credit-sum* 100.0) / 100.0);
+		mobj.put("credit", credit-sum);
 		out.println(mobj);
 		out.close();
         }
