@@ -19,4 +19,12 @@
     <servlet-name>status</servlet-name>
     <url-pattern>/status</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>query</servlet-name>
+    <servlet-class>com.example.QueryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>query</servlet-name>
+    <url-pattern>/query</url-pattern>
+  </servlet-mapping>
 </web-app>

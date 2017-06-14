@@ -8,10 +8,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="chart.js"></script>
+  <script src="project_chart.js"></script>
   <style>
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 612px}
@@ -47,6 +48,16 @@
 	.v-center{
 		margin-top:20px;
 	}
+	.cnt {
+    width: 400px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.cnt img {
+    margin-right: 15px;
+    float: left;
+}
   </style>
 </head>
 <body>
@@ -58,7 +69,10 @@
       <div class="well">
 		<div class="row">
 		<div class="col-sm-6 v-center">
+			<div class="cnt">
+			<img src="gcp_icon.png" class="img-rounded" alt="Cinque Terre" width="100" height="100">
 			<h3>GCP Billing Dashboard</h3>
+			</div>
         </div>
         <div class="col-sm-3">
           <div class="well v-center">
@@ -75,8 +89,11 @@
       </div>
     </div>
 	<div class="row">
-        <div class="col-sm-12">
-		<div class="well">
+        <div class="col-sm-6">
+		<div id="curve_chart" style="width: 500px; height: 400px"></div>
+      </div>
+	  <div class="col-sm-6">
+	  <div class="well">
           Period :  
 			<div class='wrapper'>
 			<label for="from">from:</label>
@@ -85,8 +102,7 @@
 			<input type="text" id="to" name="to">
 			</div>
         </div>
-		<div id="curve_chart" style="width: 500px; height: 400px"></div>
-      </div>
+	  </div>
 	</div>
      
   </div>
