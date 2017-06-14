@@ -38,5 +38,4 @@ function drawChart() {
         var chart = new google.visualization.BarChart(document.getElementById('curve_chart'));
 
         chart.draw(data, options);
-      }
 }
