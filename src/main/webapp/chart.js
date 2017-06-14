@@ -8,16 +8,12 @@ http.open("GET", "report", true);
 		http.onreadystatechange = function() {//Call a function when the state changes.
 			if(http.readyState == 4 && http.status == 200) {
 				 data = JSON.parse(http.responseText);
-				 var i;
-				 for(i=0;i<data.names.length;i++)
-				 {
-					createElement(data.names[i], data.amounts[i], i);
-				 }
 			}
 		}
 		
 http.send();
 
+alert(data.credit);
 alert(data.amounts);
 var am=parseFloat(data.amounts[0])/500.00*100;
 var div1 = document.createElement("div");
