@@ -52,14 +52,8 @@ public class ReportServlet extends HttpServlet {
         
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-	//resp.setContentType("application/json");
-	PrintWriter out=resp.getWriter();
-	String n1=req.getParameter("sdate");
-	String n2=req.getParameter("edate");
-	n1 = "2017-05-31";
-	n2 = "2017-06-14";
-	//out.println(n1);
-	//out.println(n2);
+	resp.setContentType("application/json");
+    PrintWriter out = resp.getWriter();
         try{
         BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 		String query =  "SELECT "
@@ -103,8 +97,7 @@ public class ReportServlet extends HttpServlet {
 		query =  "SELECT "
                     + "sum(cost), project.name "
                     + "FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8` "
-                    + "WHERE _PARTITIONTIME > TIMESTAMP('"+n1+"') "
-					+ "and _PARTITIONTIME < TIMESTAMP('"+n2+"') "
+                                        + "WHERE _PARTITIONTIME > TIMESTAMP('2017-05-31') "
                     + "group by project.name";
         result = queryBigquery(bigquery, query);
         
