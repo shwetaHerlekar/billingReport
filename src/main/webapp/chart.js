@@ -2,6 +2,7 @@ var jresp,data;
 google.charts.load("current", {packages:["corechart"]});
 
 window.onload = function(){
+alert("in chart js");
 var http = new XMLHttpRequest();
 http.open("GET", "report", true);
 
