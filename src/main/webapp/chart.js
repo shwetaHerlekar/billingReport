@@ -20,15 +20,16 @@ function drawChart() {
 		data = new google.visualization.DataTable();
 		data.addColumn('string', 'Project Name');
 		data.addColumn('number', 'Amount spent');
+		data.addColumn({type:'string',role:'annotation'});
 		
 		var i;
 		for(i=0;i<jresp.amounts.length;i++)
 		{
-				alert(jresp.names[i]);
-				alert(parseFloat(jresp.amounts[i]));
-				data.addRow([jresp.names[i].toString(),parseFloat(jresp.amounts[i])]);
+				//alert(jresp.names[i]);
+				//alert(parseFloat(jresp.amounts[i]));
+				data.addRow([jresp.names[i].toString(),parseFloat(jresp.amounts[i]),jresp.amounts[i]]);
 		}
-		alert(data)
+		//alert(data)
 		var options = {
           title: 'Amount spent till today on each project',
           legend: { position: 'bottom' },
