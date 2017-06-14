@@ -8,6 +8,16 @@ http.open("GET", "report", true);
 		http.onreadystatechange = function() {//Call a function when the state changes.
 			if(http.readyState == 4 && http.status == 200) {
 				jresp = JSON.parse(http.responseText);
+				if(parseFloat(jresp.credit)<0)
+				{
+					document.getElementById('credit').innerHTML="0";
+					document.getElementById('due').innerHTML=(parseFloat(jresp.credit)*-1).toString();
+				}
+				else
+				{
+					document.getElementById('credit').innerHTML=jresp.credit;
+					document.getElementById('due').innerHTML="0";
+				}
 				google.charts.setOnLoadCallback(drawChart);
 			}
 		}
