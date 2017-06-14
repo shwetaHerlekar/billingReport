@@ -1,6 +1,6 @@
-window.onload = function(){
-alert("In chart js");
 var data;
+google.charts.load("current", {packages:["corechart"]});
+window.onload = function(){
 var http = new XMLHttpRequest();
 http.open("GET", "report", true);
 
@@ -10,8 +10,33 @@ http.open("GET", "report", true);
 				data = JSON.parse(http.responseText);
 				alert(data.credit);
 				alert(data.amounts);
+				google.charts.setOnLoadCallback(drawChart);
 			}
 		}
 		
 http.send();
+}
+
+function drawChart() {
+        
+		data = new google.visualization.DataTable();
+		data.addColumn('string', 'Project Name');
+		data.addColumn('number', 'Amount spent');
+		data.addColumn('string', '{ role: "annotation" }');
+		
+		var i;
+		for(i=0;i<data.amounts.length;i++)
+		{
+				data.addRow([data.names[i],parseFloat(data.amounts[i]),data.amounts[i]]);
+		}
+		
+		var options = {
+          title: 'Amount spent till today on each project',
+          legend: { position: 'bottom' },
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
 }
