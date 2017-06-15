@@ -139,7 +139,7 @@ function drawChart1() {
 		//alert(sum)
 		document.getElementById('amount').innerHTML="Amount :"+sum.toString();
 		var options = {
-          title: 'Amount spent till today on each project',
+          title: 'Amount spent different products',
           legend: { position: 'bottom' },
         };
 
