@@ -12,7 +12,7 @@ var p_name = " and project.name = ";
 var grp =" group by product"
 
 window.onload = function(){
-alert("in chart js");
+//alert("in chart js");
 setPicker();
 console.log("back");
 var http = new XMLHttpRequest();
@@ -77,7 +77,7 @@ function clickMe(){
 }
 
 function setPicker(){
-alert("picker");
+//alert("picker");
 $('#from').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2016, 4, 31));
 $('#to').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2017, 3, 1));
 $( "#from" ).datepicker({
@@ -98,12 +98,11 @@ $( "#from" ).datepicker({
         $( "#from" ).datepicker( "option", "maxDate", selectedDate );
       }
 });
-createQuery()
 }
 
 function createQuery()
 {
-	alert("query");
+	//alert("query");
 	var s = $("#from").val();
 	s = s.substring(6,s.length)+"-"+s.substring(3,5)+"-"+s.substring(0,2);
 	//alert(s);
@@ -113,7 +112,7 @@ function createQuery()
 	end+="TIMESTAMP('"+e+"')";
 	p_name+="'"+document.getElementById('target').value+"'";
 	query+=start+end+p_name+grp;
-	//loadData()
+	loadData()
 }
 
 function loadData(){
