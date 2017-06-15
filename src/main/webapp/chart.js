@@ -107,7 +107,7 @@ function createQuery()
 	var e = $("#to").val();
 	start+="TIMESTAMP('"+s+"')";
 	end+="TIMESTAMP('"+e+"')";
-	p_name+=document.getElementById('target').value;
+	p_name+="'"+document.getElementById('target').value+"'";
 	query+=start+end+p_name+grp;
 	loadData()
 }
