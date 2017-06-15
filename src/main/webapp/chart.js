@@ -69,7 +69,7 @@ function drawChart() {
         var chart = new google.visualization.BarChart(document.getElementById('curve_chart'));
 
         chart.draw(data, options);
-		loadData();
+		createQuery();
 }
 
 function clickMe(){
@@ -98,7 +98,6 @@ $( "#from" ).datepicker({
         $( "#from" ).datepicker( "option", "maxDate", selectedDate );
       }
 });
-createQuery();
 }
 
 function createQuery()
@@ -110,11 +109,11 @@ function createQuery()
 	end+="TIMESTAMP("+e+")";
 	p_name+=document.getElementById('target').value;
 	query+=start+end+p_name+grp;
-	alert(query);
-	return;
+	loadData()
 }
 
 function loadData(){
+	alert(query);
 	var http = new XMLHttpRequest();
 	http.open("GET", "query?query="+query, true);
 	//Send the proper header information along with the request
