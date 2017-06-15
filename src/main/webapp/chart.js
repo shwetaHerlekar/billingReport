@@ -69,6 +69,7 @@ function drawChart() {
         var chart = new google.visualization.BarChart(document.getElementById('curve_chart'));
 
         chart.draw(data, options);
+		loadData();
 }
 
 function clickMe(){
@@ -123,4 +124,5 @@ function loadData(){
 				alert(jresp1);
 		}
 	}
+	http.send();
 }
