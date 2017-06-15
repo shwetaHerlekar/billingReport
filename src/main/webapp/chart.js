@@ -141,7 +141,7 @@ function drawChart1() {
 		{
 				//alert(jresp.names[i]);
 				sum+=parseFloat(jresp1.amounts[i]);
-				data.addRow([jresp1.names[i].toString(),parseFloat(jresp1.amounts[i]),jresp1.amounts[i]]);
+				data.addRow([jresp1.names[i],parseFloat(jresp1.amounts[i]),jresp1.amounts[i]]);
 		}
 		//alert(sum)
 		document.getElementById('amount').innerHTML="Amount :"+sum.toString();
