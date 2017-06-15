@@ -5,6 +5,7 @@ google.charts.load("current", {packages:["corechart"]});
 
 window.onload = function(){
 //alert("in chart js");
+//createQuery();
 setPicker();
 console.log("back");
 var http = new XMLHttpRequest();
@@ -95,7 +96,7 @@ $( "#from" ).datepicker({
 function createQuery()
 {
 	init();
-	//alert("query");
+	alert("query");
 	var s = $("#from").val();
 	s = s.substring(6,s.length)+"-"+s.substring(3,5)+"-"+s.substring(0,2);
 	//alert(s);
@@ -109,7 +110,7 @@ function createQuery()
 }
 
 function loadData(){
-	//alert(query);
+	alert(query);
 	var http = new XMLHttpRequest();
 	http.open("GET", "query?query="+query, true);
 	//Send the proper header information along with the request
@@ -149,6 +150,7 @@ function drawChart1() {
 }
 
 function init(){
+alert("in init");
 query = "SELECT sum(cost), product FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
 
 start = " WHERE _PARTITIONTIME > ";
