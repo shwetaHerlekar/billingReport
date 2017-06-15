@@ -1,7 +1,7 @@
 var jresp,data;
 google.charts.load("current", {packages:["corechart"]});
 
-var bquery = "SELECT sum(cost), product FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
+var query = "SELECT sum(cost), product FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
 
 var start = " WHERE _PARTITIONTIME > ";
 
@@ -12,7 +12,9 @@ var p_name = " and project.name = ";
 var grp =" group by product"
 
 window.onload = function(){
+//alert("window load");
 setPicker();
+console.log("back");
 var http = new XMLHttpRequest();
 http.open("GET", "report", true);
 
@@ -74,6 +76,7 @@ function clickMe(){
 }
 
 function setPicker(){
+//alert("picker");
 $('#from').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2016, 4, 31));
 $('#to').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2017, 3, 1));
 $( "#from" ).datepicker({
@@ -99,11 +102,25 @@ createQuery();
 
 function createQuery()
 {
-	var s = $("from").val();
-	var e = $("to").val();
+	//alert("query");
+	var s = $("#from").val();
+	var e = $("#to").val();
 	start+="TIMESTAMP("+s+")";
 	end+="TIMESTAMP("+e+")";
 	p_name+=document.getElementById('target').value;
 	query+=start+end+p_name+grp;
 	alert(query);
+	return;
+}
+
+function loadData(){
+	var http = new XMLHttpRequest();
+	http.open("GET", "query", true);
+	//Send the proper header information along with the request
+	http.onreadystatechange = function() {//Call a function when the state changes.
+		if(http.readyState == 4 && http.status == 200) {
+				var jresp1 = JSON.parse(http.responseText);
+				alert(jresp1);
+		}
+	}
 }

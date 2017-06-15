@@ -53,46 +53,45 @@ public class QueryServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 	resp.setContentType("application/json");
+	String query = req.getParameter();
     PrintWriter out = resp.getWriter();
         try{
         BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-		String query =  "SELECT "
-                    + "* "
-                    + "FROM `billing-167908.billing_stats.Total_Billing_Status1` order by project1 desc";
+		
 		QueryResult result = queryBigquery(bigquery, query);
         
-        ArrayList<String> project_names1=new ArrayList<String>();
-        ArrayList<String> total_spent=new ArrayList<String>();
+        ArrayList<String> product=new ArrayList<String>();
+        ArrayList<String> spent=new ArrayList<String>();
 		
-        int index=0;
-        List<FieldValue> row1 = null;
-        while (result != null) {
+		while (result != null) {
                 for (List<FieldValue> row : result.iterateAll()) {
-                                row1 = row;
-                                //out.println(String.valueOf(row));
-                                if(index==0)
-                                {
-                                        for(int k=0; k<row.size();k++)
-                                        {
-                                                project_names1.add(row.get(k).getStringValue());
-                                        }
-                                        index+=1;
-                                        continue;
-                                }
-								 if(index==1)
-                                {
-                                        for(int k=0; k<row.size();k++)
-                                        {
-                                                total_spent.add(row.get(k).getStringValue());
-                                        }
-                                        index+=1;
-                                }
+                                
+                                spent.add(row.get(0).getStringValue());
+					
+                                product.add(row.get(1).getStringValue());
+                                                                
                 }
-				      result = result.getNextPage();
+                result = result.getNextPage();
         }
 		
-		//out.println(total_spent);
-		//out.println(project_names1);
+		for(int k =0;k<spent.size();k++)
+		{
+			double roundOff = Math.round(Double.parseDouble(spent.get(k))* 100.0) / 100.0;
+			spent.set(k,String.valueOf(roundOff));
+			
+		}
+		
+		JSONObject mobj = new JSONObject();
+		JSONArray p_names = new JSONArray();
+		JSONArray am_spent = new JSONArray();
+        for(int i=0;i<spent.size();i++)
+		{
+			p_names.add(product.get(i));
+			am_spent.add(spent.get(i));
+		}
+		mobj.put("names", p_names);
+		mobj.put("amounts", am_spent);
+		out.println(mobj);
 		
 		out.close();
         }
