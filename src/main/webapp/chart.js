@@ -1,6 +1,16 @@
 var jresp,data;
 google.charts.load("current", {packages:["corechart"]});
 
+var bquery = "SELECT sum(cost), product FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
+
+var start = " WHERE _PARTITIONTIME > ";
+
+var end = " and _PARTITIONTIME < ";
+
+var p_name = " and project.name = ";
+
+var grp =" group by product"
+
 window.onload = function(){
 setPicker();
 var http = new XMLHttpRequest();
@@ -71,6 +81,7 @@ $( "#from" ).datepicker({
       changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
+		alert(selectedDate);
         $( "#to" ).datepicker( "option", "minDate", selectedDate );
       }
     });
@@ -79,11 +90,20 @@ $( "#from" ).datepicker({
       changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
+		alert(selectedDate);
         $( "#from" ).datepicker( "option", "maxDate", selectedDate );
       }
 });
-var sdate = $('#from').val()
-var edate = $('#to').val()
-var url = "report?sdate="+sdate+"&edate="+edate;
-alert(url);
+createQuery();
+}
+
+function createQuery()
+{
+	var s = $("from").val();
+	var e = $("to").val();
+	start+="TIMESTAMP("+s+")";
+	end+="TIMESTAMP("+e+")";
+	p_name+=document.getElementById('target').value;
+	query+=start+end+p_name+grp;
+	alert(query);
 }
