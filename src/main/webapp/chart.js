@@ -79,7 +79,7 @@ function clickMe(){
 function setPicker(){
 //alert("picker");
 $('#from').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2016, 4, 31));
-$('#to').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2017, 3, 1));
+$('#to').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2017, 6, 15));
 $( "#from" ).datepicker({
       defaultDate: "+1w",
       changeMonth: true,
