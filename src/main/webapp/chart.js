@@ -1,4 +1,4 @@
-var jresp,data,jresp1,sum;
+var jresp,data,jresp1,sum=0;
 google.charts.load("current", {packages:["corechart"]});
 
 var query = "SELECT sum(cost), product FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
@@ -116,7 +116,7 @@ function createQuery()
 }
 
 function loadData(){
-	alert(query);
+	//alert(query);
 	var http = new XMLHttpRequest();
 	http.open("GET", "query?query="+query, true);
 	//Send the proper header information along with the request
@@ -140,10 +140,11 @@ function drawChart1() {
 		for(i=0;i<jresp.amounts.length;i++)
 		{
 				//alert(jresp.names[i]);
-				//alert(parseFloat(jresp.amounts[i]));
+				sum+=parseFloat(jresp.amounts[i]);
 				data.addRow([jresp1.names[i].toString(),parseFloat(jresp1.amounts[i]),jresp1.amounts[i]]);
 		}
-		//alert(data)
+		//alert(sum)
+		document.getElementById('amount').innerHTML="Amount :"+sum.toString();
 		var options = {
           title: 'Amount spent till today on each project',
           legend: { position: 'bottom' },
