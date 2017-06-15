@@ -1,4 +1,4 @@
-var jresp,data;
+var jresp,data,jresp1,sum;
 google.charts.load("current", {packages:["corechart"]});
 
 var query = "SELECT sum(cost), product FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
@@ -73,19 +73,19 @@ function drawChart() {
 }
 
 function clickMe(){
-	alert("Clicked Me");
+	createQuery();
 }
 
 function setPicker(){
 //alert("picker");
 $('#from').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2016, 4, 31));
-$('#to').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2017, 6, 15));
+$('#to').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2017, 5, 15));
 $( "#from" ).datepicker({
       defaultDate: "+1w",
       changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
-		alert(selectedDate);
+		createQuery();
         $( "#to" ).datepicker( "option", "minDate", selectedDate );
       }
     });
@@ -94,7 +94,7 @@ $( "#from" ).datepicker({
       changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
-		alert(selectedDate);
+		createQuery();
         $( "#from" ).datepicker( "option", "maxDate", selectedDate );
       }
 });
@@ -122,9 +122,35 @@ function loadData(){
 	//Send the proper header information along with the request
 	http.onreadystatechange = function() {//Call a function when the state changes.
 		if(http.readyState == 4 && http.status == 200) {
-				var jresp1 = JSON.parse(http.responseText);
-				alert(jresp1);
+				jresp1 = JSON.parse(http.responseText);
+				drawChart1();
 		}
 	}
 	http.send();
 }
+
+function drawChart1() {
+        
+		data = new google.visualization.DataTable();
+		data.addColumn('string', 'Project Name');
+		data.addColumn('number', 'Amount spent');
+		data.addColumn({type:'string',role:'annotation'});
+		
+		var i;
+		for(i=0;i<jresp.amounts.length;i++)
+		{
+				//alert(jresp.names[i]);
+				//alert(parseFloat(jresp.amounts[i]));
+				data.addRow([jresp1.names[i].toString(),parseFloat(jresp1.amounts[i]),jresp1.amounts[i]]);
+		}
+		//alert(data)
+		var options = {
+          title: 'Amount spent till today on each project',
+          legend: { position: 'bottom' },
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart1'));
+
+        chart.draw(data, options);
+}
+
