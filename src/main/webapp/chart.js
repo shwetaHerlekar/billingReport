@@ -149,7 +149,7 @@ function drawChart1() {
 }
 
 function init(){
-query = "SELECT sum(cost), product FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`",query1;
+query = "SELECT sum(cost), product FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
 
 start = " WHERE _PARTITIONTIME > ";
 
@@ -158,5 +158,6 @@ end = " and _PARTITIONTIME < ";
 p_name = " and project.name = ";
 
 grp =" group by product"
+return;
 }
 
