@@ -10,6 +10,13 @@ http.open("GET", "report", true);
 		http.onreadystatechange = function() {//Call a function when the state changes.
 			if(http.readyState == 4 && http.status == 200) {
 				jresp = JSON.parse(http.responseText);
+				select = document.getElementById("target");
+				for (var i = 0; i<jresp.names.length; i++){
+					var li = document.createElement('li');
+					li.setAttribute("onclick", "clickMe(event)");
+					li.innerHTML = jresp.names[i];
+					select.appendChild(li);
+				}
 				if(parseFloat(jresp.credit)<0)
 				{
 					document.getElementById('credit').innerHTML="0";
@@ -50,4 +57,8 @@ function drawChart() {
         var chart = new google.visualization.BarChart(document.getElementById('curve_chart'));
 
         chart.draw(data, options);
+}
+
+function clickMe(e){
+	alert("Clicked Me");
 }
