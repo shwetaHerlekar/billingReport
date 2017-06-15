@@ -1,15 +1,7 @@
-var jresp,data,jresp1,sum=0;
+var jresp,data,jresp1,sum=0.0,query,start,end,p_name,grp;
 google.charts.load("current", {packages:["corechart"]});
 
-var query = "SELECT sum(cost), product FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
 
-var start = " WHERE _PARTITIONTIME > ";
-
-var end = " and _PARTITIONTIME < ";
-
-var p_name = " and project.name = ";
-
-var grp =" group by product"
 
 window.onload = function(){
 //alert("in chart js");
@@ -102,6 +94,7 @@ $( "#from" ).datepicker({
 
 function createQuery()
 {
+	init();
 	//alert("query");
 	var s = $("#from").val();
 	s = s.substring(6,s.length)+"-"+s.substring(3,5)+"-"+s.substring(0,2);
@@ -111,7 +104,7 @@ function createQuery()
 	start+="TIMESTAMP('"+s+"')";
 	end+="TIMESTAMP('"+e+"')";
 	p_name+="'"+document.getElementById('target').value+"'";
-	query+=start+end+p_name+grp;
+	query1+=start+end+p_name+grp;
 	loadData()
 }
 
@@ -153,5 +146,17 @@ function drawChart1() {
         var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart1'));
 
         chart.draw(data, options);
+}
+
+function init(){
+query = "SELECT sum(cost), product FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`",query1;
+
+start = " WHERE _PARTITIONTIME > ";
+
+end = " and _PARTITIONTIME < ";
+
+p_name = " and project.name = ";
+
+grp =" group by product"
 }
 
