@@ -1,5 +1,5 @@
 window.onload = function(){
-alert("Hello");
+
 $('#from').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2016, 4, 31));
 $('#to').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2017, 3, 1));
 $( "#from" ).datepicker({

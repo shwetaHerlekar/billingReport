@@ -106,7 +106,7 @@ function createQuery()
 	end+="TIMESTAMP('"+e+"')";
 	p_name+="'"+document.getElementById('target').value+"'";
 	query1+=start+end+p_name+grp;
-	loadData()
+	loadData();
 }
 
 function loadData(){
