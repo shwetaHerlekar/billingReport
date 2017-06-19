@@ -5,7 +5,7 @@ var myDiv,myDiv1;
 show = function(){
 		myDiv1.style.display = "none";
 	    myDiv.style.display = "block";
-        setTimeout(hide, 5000); // 5 seconds
+        setTimeout(hide, 5100); // 5 seconds
       },
 
       hide = function(){
@@ -154,8 +154,8 @@ function drawChart1() {
 				}
 				data.addRow([jresp1.names[i],parseFloat(jresp1.amounts[i]),jresp1.amounts[i]]);
 		}
-		alert(sum);
-		document.getElementById('amount').innerHTML="Amount :"+sum.toString();
+		//alert(sum);
+		document.getElementById('amount').innerHTML="Amount($):"+sum.toString();
 		var options = {
           legend: { position: 'bottom' },
         };
