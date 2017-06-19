@@ -105,7 +105,7 @@ function createQuery()
 	start+="TIMESTAMP('"+s+"')";
 	end+="TIMESTAMP('"+e+"')";
 	p_name+="'"+document.getElementById('target').value+"'";
-	query1+=start+end+p_name+grp;
+	query+=start+end+p_name+grp;
 	loadData();
 }
 
