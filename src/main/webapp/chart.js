@@ -1,4 +1,4 @@
-var jresp,data,jresp1,sum=0.0,query,start,end,p_name,grp;
+var jresp,data,jresp1,sum=0,query,start,end,p_name,grp;
 google.charts.load("current", {packages:["corechart"]});
 
 
@@ -8,6 +8,26 @@ window.onload = function(){
 //createQuery();
 setPicker();
 console.log("back");
+$( "#from" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      onClose: function( selectedDate ) {
+		//alert("changed");
+		createQuery();
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+$( "#to" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      onClose: function( selectedDate ) {
+		//alert("changed");
+		createQuery();
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+});
 var http = new XMLHttpRequest();
 http.open("GET", "report", true);
 
@@ -73,30 +93,13 @@ function setPicker(){
 //alert("picker");
 $('#from').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2016, 4, 31));
 $('#to').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2017, 5, 15));
-$( "#from" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 1,
-      onClose: function( selectedDate ) {
-		createQuery();
-        $( "#to" ).datepicker( "option", "minDate", selectedDate );
-      }
-    });
-    $( "#to" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 1,
-      onClose: function( selectedDate ) {
-		createQuery();
-        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
-      }
-});
 }
+
 
 function createQuery()
 {
 	init();
-	alert("query");
+	//alert("query");
 	var s = $("#from").val();
 	s = s.substring(6,s.length)+"-"+s.substring(3,5)+"-"+s.substring(0,2);
 	//alert(s);
@@ -110,7 +113,7 @@ function createQuery()
 }
 
 function loadData(){
-	alert(query);
+	//alert(query);
 	var http = new XMLHttpRequest();
 	http.open("GET", "query?query="+query, true);
 	//Send the proper header information along with the request
@@ -137,7 +140,7 @@ function drawChart1() {
 				sum+=parseFloat(jresp1.amounts[i]);
 				data.addRow([jresp1.names[i],parseFloat(jresp1.amounts[i]),jresp1.amounts[i]]);
 		}
-		//alert(sum)
+		alert(sum)
 		document.getElementById('amount').innerHTML="Amount :"+sum.toString();
 		var options = {
           title: 'Amount spent different products',
@@ -150,7 +153,7 @@ function drawChart1() {
 }
 
 function init(){
-alert("in init");
+//alert("in init");
 query = "SELECT sum(cost), product FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
 
 start = " WHERE _PARTITIONTIME > ";
