@@ -91,9 +91,8 @@ function clickMe(){
 
 function setPicker(){
 //alert("picker");
-$('#from').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2016, 4, 31));
+$('#from').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2017, 4, 31));
 $('#to').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2017, 5, 15));
-return;
 }
 
 
@@ -114,7 +113,7 @@ function createQuery()
 }
 
 function loadData(){
-	//alert(query);
+	alert(query);
 	var http = new XMLHttpRequest();
 	http.open("GET", "query?query="+query, true);
 	//Send the proper header information along with the request
