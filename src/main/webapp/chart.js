@@ -1,4 +1,4 @@
-var jresp,data,jresp1,sum=0,query,start,end,p_name,grp;
+var jresp,data,jresp1,query,start,end,p_name,grp;
 google.charts.load("current", {packages:["corechart"]});
 
 
@@ -6,8 +6,6 @@ google.charts.load("current", {packages:["corechart"]});
 window.onload = function(){
 //alert("in chart js");
 //createQuery();
-setPicker();
-console.log("back");
 $( "#from" ).datepicker({
       defaultDate: "+1w",
       changeMonth: true,
@@ -28,6 +26,8 @@ $( "#to" ).datepicker({
         $( "#from" ).datepicker( "option", "maxDate", selectedDate );
       }
 });
+setPicker();
+console.log("back");
 var http = new XMLHttpRequest();
 http.open("GET", "report", true);
 
@@ -93,6 +93,7 @@ function setPicker(){
 //alert("picker");
 $('#from').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2016, 4, 31));
 $('#to').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(2017, 5, 15));
+return;
 }
 
 
@@ -133,14 +134,13 @@ function drawChart1() {
 		data.addColumn('number', 'Amount spent');
 		data.addColumn({type:'string',role:'annotation'});
 		
-		var i;
+		var i,sum=0;
 		for(i=0;i<jresp.amounts.length;i++)
 		{
-				//alert(jresp.names[i]);
 				sum+=parseFloat(jresp1.amounts[i]);
 				data.addRow([jresp1.names[i],parseFloat(jresp1.amounts[i]),jresp1.amounts[i]]);
 		}
-		alert(sum)
+		alert(sum);
 		document.getElementById('amount').innerHTML="Amount :"+sum.toString();
 		var options = {
           title: 'Amount spent different products',
