@@ -105,90 +105,74 @@
 }
 
  .bcolor{
-	background-color : #BF5279;
+	background-color : #339cff;
 	border-radius: 20px;
 	color : white;
 	text-align : center;
  }
- .header {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-.content {
-  z-index:1;
-  position: relative;
-}
  
- .row_divs{
-	position: relative;
-	padding-top : 200px;
-	text-align : center;
+ #loading {
+    position: absolute; width: 100%; height: 100%; background: url('ajax-loader.gif') no-repeat center center;
+	}
+	
+ #main{
+	display: none;
  }
   </style>
 </head>
 <body>
 
-
-<div class="container-fluid">
-  <div class="row header">
-	<div class="col-sm-12 bgcolor">
-      <div class="well">
-		<div class="row">
-		<div class="col-sm-6 v-center">
-			<div class="cnt">
+<div id="loading"></div>
+<div class="container-fluid" id="main">
+  <div class="row well">
+	<div class="col-sm-4 bgcolor v-center">
 			<img src="gcp_icon.png" class="img-rounded" alt="Cinque Terre">
-			</div>
-			<div class="topnav">
-			<a class="active" href="#row1">Credit and Due</a>
-			<a href="#row2">Total spent on projects</a>
-			<a href="#row3">Details of spent amount per project</a>
-			</div>
-        </div>
-      </div>
-    </div>
 	</div>
-	</div>
-	<div class="content">
-	<div class="row row_divs" id="row1">
-		 <div class="col-sm-2"></div>
-		 <div class="col-sm-3 bcolor">
+	<div class="col-sm-8">
+		<div class="col-sm-4 bcolor">
           <div class="v-center bcolor">
             <h4>Credit remaining($)</h4>
 			<p id="credit">0</p>
           </div>
         </div>
 		<div class="col-sm-2"></div>
-        <div class="col-sm-3 bcolor">
+		<div class="col-sm-4 bcolor">
           <div class="v-center bcolor">
             <h4>Amount Due($)</h4>
 			<p id="due">0</p>
           </div>
         </div>
-	 </div>
-	<div class="row row_divs" id="row2">
-      <div class="col-sm-12" style="text-align:center;">
-		<div id="curve_chart" style="width: 500px; height: 400px"></div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-12">
+		<div style="width:100%;height:40px;color:white;background-color:black;font-size:20px;font-weight:bold;"><marquee>GCP Billing Dashboard</marquee></div>
+		</div>
+	</div>
+	<div class="row">
+      <div class="col-sm-6" style="text-align:center;">
+		<h4 style="color:#ff3349;">Amount spent on each project</h4>
+		<div id="curve_chart" ></div>
       </div>
-	 </div>
-	 <div class="row row_divs" id="row3">
-      <div class="col-sm-12">
-	  <div class="well">
+	  <div class="col-sm-6" style="text-align:center;align:center;">
+	  <h4 style="color:#ff3349;">Amount spent on particular project in given timespan</h4>
+		<div style="padding:3px;">
           Period :  
 			<div class='wrapper'>
 			<label for="from">from:</label>
 			<input type="text" id="from" name="from">
 			<label for="to">to:</label>
 			<input type="text" id="to" name="to">
-			</div>
-        </div>
-		<select class="form-control" id="target" onchange="clickMe()">
+			</div></div><br>
+		<div style="padding:2px;">
+		Select Project : <select id="target" onchange="clickMe()" style="width:200px;">
 		</select>
-		<h5 id="amount"></h5>
-		<div id="curve_chart1" style="width: 500px; height: 400px"></div>
+		<div>
+		<h4 id="amount" style="padding:6px;"></h4>
+		<div id="curve_chart1"></div>
 		</div>
 	</div>
-	</div>
+</div>
 </body>
 </html>

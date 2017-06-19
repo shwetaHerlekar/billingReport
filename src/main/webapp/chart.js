@@ -1,9 +1,22 @@
 var jresp,data,jresp1,query,start,end,p_name,grp;
 google.charts.load("current", {packages:["corechart"]});
+var myDiv,myDiv1;
 
+show = function(){
+		myDiv1.style.display = "none";
+	    myDiv.style.display = "block";
+        setTimeout(hide, 5000); // 5 seconds
+      },
 
+      hide = function(){
+		myDiv1.style.display = "block";
+        myDiv.style.display = "none";
+      };
 
 window.onload = function(){
+myDiv= document.getElementById("loading");
+myDiv1= document.getElementById("main");
+show();
 //alert("in chart js");
 //createQuery();
 $( "#from" ).datepicker({
@@ -75,7 +88,6 @@ function drawChart() {
 		}
 		//alert(data)
 		var options = {
-          title: 'Amount spent till today on each project',
           legend: { position: 'bottom' },
         };
 
@@ -145,7 +157,6 @@ function drawChart1() {
 		alert(sum);
 		document.getElementById('amount').innerHTML="Amount :"+sum.toString();
 		var options = {
-          title: 'Amount spent different products',
           legend: { position: 'bottom' },
         };
 
