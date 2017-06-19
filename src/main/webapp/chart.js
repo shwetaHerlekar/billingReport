@@ -101,10 +101,10 @@ function createQuery()
 	init();
 	//alert("query");
 	var s = $("#from").val();
-	s = s.substring(6,s.length)+"-"+s.substring(3,5)+"-"+s.substring(0,2);
+	s = s.substring(6,s.length)+"-"+s.substring(0,2)+"-"+s.substring(3,5);
 	//alert(s);
 	var e = $("#to").val();
-	e = e.substring(6,e.length)+"-"+e.substring(3,5)+"-"+e.substring(0,2);
+	e = e.substring(6,e.length)+"-"+e.substring(0,2)+"-"+e.substring(3,5);
 	start+="TIMESTAMP('"+s+"')";
 	end+="TIMESTAMP('"+e+"')";
 	p_name+="'"+document.getElementById('target').value+"'";
