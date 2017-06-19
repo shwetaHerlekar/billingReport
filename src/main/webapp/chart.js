@@ -136,7 +136,7 @@ function drawChart1() {
 		var i,sum=0;
 		for(i=0;i<jresp.amounts.length;i++)
 		{
-				sum+=parseFloat(jresp1.amounts[i]);
+				alert(parseFloat(jresp1.amounts[i]));
 				data.addRow([jresp1.names[i],parseFloat(jresp1.amounts[i]),jresp1.amounts[i]]);
 		}
 		alert(sum);
