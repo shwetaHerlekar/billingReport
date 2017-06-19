@@ -113,7 +113,7 @@ function createQuery()
 }
 
 function loadData(){
-	alert(query);
+	//alert(query);
 	var http = new XMLHttpRequest();
 	http.open("GET", "query?query="+query, true);
 	//Send the proper header information along with the request
@@ -136,7 +136,10 @@ function drawChart1() {
 		var i,sum=0;
 		for(i=0;i<jresp.amounts.length;i++)
 		{
-				alert(parseFloat(jresp1.amounts[i]));
+				if(!isNaN(parseFloat(jresp1.amounts[i])))
+				{
+					sum+=parseFloat(jresp1.amounts[i]);
+				}
 				data.addRow([jresp1.names[i],parseFloat(jresp1.amounts[i]),jresp1.amounts[i]]);
 		}
 		alert(sum);

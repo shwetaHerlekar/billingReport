@@ -81,7 +81,7 @@
  .topnav {
   overflow: hidden;
   background-color: #333;
-  width : 1100px;
+  width: 1100px;
 }
 
 .topnav a {
@@ -114,13 +114,18 @@
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 10;
+  z-index: 1000;
 }
 .content {
-  margin-top: 200px;
   z-index:1;
+  position: relative;
 }
  
+ .row_divs{
+	position: relative;
+	padding-top : 200px;
+	text-align : center;
+ }
   </style>
 </head>
 <body>
@@ -146,7 +151,7 @@
 	</div>
 	</div>
 	<div class="content">
-	<div class="row" id="row1">
+	<div class="row row_divs" id="row1">
 		 <div class="col-sm-2"></div>
 		 <div class="col-sm-3 bcolor">
           <div class="v-center bcolor">
@@ -162,12 +167,12 @@
           </div>
         </div>
 	 </div>
-	<div class="row" id="row2">
+	<div class="row row_divs" id="row2">
       <div class="col-sm-12" style="text-align:center;">
 		<div id="curve_chart" style="width: 500px; height: 400px"></div>
       </div>
 	 </div>
-	 <div class="row" id="row3">
+	 <div class="row row_divs" id="row3">
       <div class="col-sm-12">
 	  <div class="well">
           Period :  
