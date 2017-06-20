@@ -96,8 +96,6 @@ function drawChart() {
 		}
 		//alert(data)
 		var options = {
-		   width: 800,
-		   height: 450,
 		   bar: {groupWidth: "95%"},
           legend: { position: 'bottom' },
         };
@@ -166,7 +164,7 @@ function drawChart1() {
 				data.addRow([jresp1.names[i],parseFloat(jresp1.amounts[i]),jresp1.amounts[i]]);
 		}
 		//alert(sum);
-		document.getElementById('amount').innerHTML="Amount($):"+sum.toString();
+		document.getElementById('amount').innerHTML="Amount :$"+sum.toString();
 		var options = {
           legend: { position: 'bottom' },
         };

@@ -13,12 +13,7 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="chart.js"></script>
   <style>
-   
-	#main {
-		background-color: #d4d4dc;
-	}
-	
-	.wrapper{
+   .wrapper{
     display : inline;
     border:1px solid lightgray;
     padding:4px;
@@ -28,9 +23,7 @@
 	input {
 		border:0;
 	}
-	label {
-	color : gray;
-	}
+
 	.v-center{
 		margin-top:20px;
 	}
@@ -46,7 +39,7 @@
 }
 	
   select {
-  background: #bf5279 none repeat scroll 0 0 !important;
+  background: #339cff none repeat scroll 0 0 !important;
   border: medium none;
   color: #000;
   padding: 5px;
@@ -58,44 +51,11 @@
  select option:active, 
  select option:checked
  {
-    background: linear-gradient(#BF5279,#BF5279);
-    background-color:#BF5279 !important; /* for IE */
+    background: linear-gradient(#339cff,#339cff);
+    background-color:#339cff !important; /* for IE */
  }
  option:not(:checked) {
    background-color: #fff;
- }
- 
- .topnav {
-  overflow: hidden;
-  background-color: #333;
-  width: 1100px;
-}
-
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.topnav a.active {
-    background-color: #4CAF50;
-    color: white;
-}
-
- .bcolor{
-	background-color : #339cff;
-	border-radius: 20px;
-	color : white;
-	text-align : center;
  }
  
  #loading {
@@ -105,26 +65,59 @@
  #main{
 	display: none;
  }
+ 
+ .bcolor{
+	background-color : #339cff;
+	border-radius: 20px;
+	color : white;
+	text-align : center;
+ }
+ 
+ .divs{
+	height : 430px;
+ }
+ 
+ .title{
+	background-color:#cd6155;
+	color : white;
+	height : 40px;
+	text-align:center;
+ }
+ 
+ .charts{
+	height : 430px;
+	border : solid 1px;
+ }
+ 
+ .s-charts{
+	height : 360px;
+ }
+ 
+ #details{
+	display:none;
+ }
+ 
   </style>
 </head>
 <body>
 
 <div id="loading"></div>
 <div class="container-fluid" id="main">
-  <div class="row well">
+  <div class="row well-sm">
 	<div class="col-sm-4 bgcolor v-center">
 			<img src="gcp_icon.png" class="img-rounded" alt="Cinque Terre">
+			<h4>Billing Dashboard</h4>
 	</div>
 	<div class="col-sm-8">
 		<div class="col-sm-4 bcolor">
-          <div class="v-center bcolor">
+          <div class="bcolor" style="margin-top:20px;">
             <h4>Credit remaining($)</h4>
 			<p id="credit">0</p>
           </div>
         </div>
 		<div class="col-sm-2"></div>
 		<div class="col-sm-4 bcolor">
-          <div class="v-center bcolor">
+          <div class="v-center bcolor" style="margin-top:20px;">
             <h4>Amount Due($)</h4>
 			<p id="due">0</p>
           </div>
@@ -133,28 +126,44 @@
 	</div>
 
 	<div class="row">
-      <div class="col-sm-6" style="text-align:center;">
-		<h4 style="color:#ff3349;">Amount spent on each project</h4>
-		<div id="curve_chart" style="height:402px;"></div>
+      <div class="col-sm-5 divs">
+	  <div class="title">
+		<h4 style="padding-top:7px;">Amount spent on each project</h4>
+	  </div>
+	    <div class="charts">
+		<div id="curve_chart"></div>
+		</div>
       </div>
-	  <div class="col-sm-6" style="text-align:center;align:center;">
-	  <h4 style="color:#ff3349;">Amount spent on particular project in given timespan</h4>
-		<div style="padding:3px;">
-          Period :  
-			<div class='wrapper'>
-			<label for="from">from:</label>
-			<input type="text" id="from" name="from">
-			<label for="to">to:</label>
+	  <div class="col-sm-7 divs">
+	  <div class="title">
+	  <h4 style="padding-top:7px;">Amount spent on particular project in given timespan</h4>
+	  </div>
+	  <div class="charts">
+		<div style="text-align:center;" id="details">
+			<label><h4>Select View :</h4></label>&nbsp;&nbsp;&nbsp;
+			<div class="radio-inline">
+				<label><input type="radio" name="optradio" style="padding-top:2px;"><h5>Option 1</h5></label>
+			</div>
+			<div class="radio-inline">
+				<label><input type="radio" name="optradio"><h5>Option 2</h5></label>
+			</div>
+		</div>
+		<div style="height:30px;" class="row" >
+			<div class="col-sm-7">
+			<label>from:</label>
+			<input type="text" id="from" name="from"><label for="to">to:</label>
 			<input type="text" id="to" name="to">
-			</div></div><br>
-		<div style="padding:2px;">
-		Select Project : <select id="target" onchange="clickMe()" style="width:200px;">
+			</div>
+			<div class="col-sm-5">
+			Project : <select id="target" onchange="clickMe()" style="width:200px;">
+			</div>
 		</select>
-		<div>
-		<h4 id="amount" style="padding:6px;"></h4>
-		<div id="curve_chart1" style="height:290px;"></div>
+		</div>
+		<div style="text-align:center;">
+		<h4 id="amount"></h4>
+		<div id="curve_chart1" class="s-charts"></div>
 		</div>
 	</div>
-</div>
+	</div>
 </body>
 </html>
