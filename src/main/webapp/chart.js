@@ -92,7 +92,7 @@ function drawChart() {
 		{
 				//alert(jresp.names[i]);
 				//alert(parseFloat(jresp.amounts[i]));
-				data.addRow([jresp.names[amounts.indexOf(jresp.amounts[i]).toString(),parseFloat(jresp.amounts[i]),"$"+jresp.amounts[i]]);
+				data.addRow([jresp.names[amounts.indexOf(jresp.amounts[i])].toString(),parseFloat(jresp.amounts[i]),"$"+jresp.amounts[i]]);
 		}
 		//alert(data)
 		var options = {
