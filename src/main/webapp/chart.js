@@ -66,10 +66,11 @@ http.open("GET", "report", true);
 					document.getElementById('credit').innerHTML=jresp.credit;
 					document.getElementById('due').innerHTML="0";
 				}
-				amounts=jresp.amounts.sort();
-				for(var i=0;i<amounts.lenght;i++)
+				amounts=jresp.amounts;
+				jresp.amounts.sort(function(a, b){return b-a});
+				for(var i=0;i<jresp.amounts.lenght;i++)
 				{
-					names[i]=jresp.names[jresp.amounts.indexOf(amounts[i])];
+					names[i]=jresp.names[amounts.indexOf(jresp.amounts[i])];
 				}
 				alert(amounts);
 				alert(names);
