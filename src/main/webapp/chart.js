@@ -77,23 +77,32 @@ function drawChart() {
 		data = new google.visualization.DataTable();
 		data.addColumn('string', 'Project Name');
 		data.addColumn('number', 'Amount spent');
-		data.addColumn({type:'string',role:'annotation'});
 		
 		var i;
 		for(i=0;i<jresp.amounts.length;i++)
 		{
 				//alert(jresp.names[i]);
 				//alert(parseFloat(jresp.amounts[i]));
-				data.addRow([jresp.names[i].toString(),parseFloat(jresp.amounts[i]),jresp.amounts[i]]);
+				data.addRow([jresp.names[i].toString(),parseFloat(jresp.amounts[i])]);
 		}
 		//alert(data)
+		
+		var view = new google.visualization.DataView(data);
+		view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       ]);
+		
 		var options = {
+		  bar: {groupWidth: "95%"},
           legend: { position: 'bottom' },
         };
 
         var chart = new google.visualization.BarChart(document.getElementById('curve_chart'));
 
-        chart.draw(data, options);
+        chart.draw(view, options);
 		createQuery();
 }
 
