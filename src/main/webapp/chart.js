@@ -72,7 +72,6 @@ http.open("GET", "report", true);
 				{
 					names.push(jresp.names[amounts.indexOf(jresp.amounts[i])]);
 				}
-				alert(amounts);
 				alert(names);
 				google.charts.setOnLoadCallback(drawChart);
 			}
