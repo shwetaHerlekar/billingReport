@@ -84,13 +84,10 @@ function drawChart() {
 		{
 				//alert(jresp.names[i]);
 				//alert(parseFloat(jresp.amounts[i]));
-				data.addRow([jresp.names[i].toString(),parseFloat(jresp.amounts[i]),"Amount :"+jresp.amounts[i]]);
+				data.addRow([jresp.names[i].toString(),parseFloat(jresp.amounts[i]),"Amount :$"+jresp.amounts[i]]);
 		}
 		//alert(data)
 		var options = {
-		   width: 600,
-		   height: 400,
-           bar: {groupWidth: "95%"},
           legend: { position: 'bottom' },
         };
 
