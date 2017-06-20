@@ -67,7 +67,7 @@ http.open("GET", "report", true);
 					document.getElementById('due').innerHTML="0";
 				}
 				amounts=jresp.amounts.slice(0);
-				alert(amounts);
+				//alert(amounts);
 				jresp.amounts.sort(function(a, b){return b-a});
 				/*for(var i=0;i<jresp.amounts.lenght;i++)
 				{
