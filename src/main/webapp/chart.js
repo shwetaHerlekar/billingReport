@@ -70,7 +70,7 @@ http.open("GET", "report", true);
 				jresp.amounts.sort(function(a, b){return b-a});
 				for(var i=0;i<jresp.amounts.lenght;i++)
 				{
-					names[i]=jresp.names[amounts.indexOf(jresp.amounts[i])];
+					names.push(jresp.names[amounts.indexOf(jresp.amounts[i])]);
 				}
 				alert(amounts);
 				alert(names);
