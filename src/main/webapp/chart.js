@@ -1,4 +1,5 @@
 var jresp,data,jresp1,query,start,end,p_name,grp;
+var names[],amounts[];
 google.charts.load("current", {packages:["corechart"]});
 var myDiv,myDiv1;
 
@@ -65,6 +66,13 @@ http.open("GET", "report", true);
 					document.getElementById('credit').innerHTML=jresp.credit;
 					document.getElementById('due').innerHTML="0";
 				}
+				amounts=jresp.amounts.sort();
+				for(var i=0;i<amounts.lenght;i++)
+				{
+					names[i]=jresp.names[jresp.amounts.indexOf(amounts[i])];
+				}
+				alert(amounts);
+				alert(names);
 				google.charts.setOnLoadCallback(drawChart);
 			}
 		}
@@ -84,10 +92,13 @@ function drawChart() {
 		{
 				//alert(jresp.names[i]);
 				//alert(parseFloat(jresp.amounts[i]));
-				data.addRow([jresp.names[i].toString(),parseFloat(jresp.amounts[i]),"Amount :$"+jresp.amounts[i]]);
+				data.addRow([jresp.names[i].toString(),parseFloat(jresp.amounts[i]),"$"+jresp.amounts[i]]);
 		}
 		//alert(data)
 		var options = {
+		   width: 800,
+		   height: 450,
+		   bar: {groupWidth: "95%"},
           legend: { position: 'bottom' },
         };
 
