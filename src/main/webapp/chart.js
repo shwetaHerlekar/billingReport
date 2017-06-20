@@ -1,5 +1,5 @@
 var jresp,data,jresp1,query,start,end,p_name,grp;
-var names[],amounts[];
+var names=[],amounts=[];
 google.charts.load("current", {packages:["corechart"]});
 var myDiv,myDiv1;
 
