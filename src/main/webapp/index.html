@@ -85,17 +85,21 @@
  }
  
  .charts{
-	height : 430px;
+	height : 420px;
 	border : solid 1px;
+	padding : 10px;
+	font-size: 16px;
+	text-align : center;
  }
  
  .s-charts{
-	width : 700px;
-	height : 360px;
+	width : 660px;
+	height : 250px;
+    border : solid 2px;
  }
  
- #details{
-	display:none;
+ .row{
+ position : relative;
  }
  
   </style>
@@ -132,7 +136,7 @@
 		<h4 style="padding-top:7px;">Amount spent on each project</h4>
 	  </div>
 	    <div class="charts">
-		<div id="curve_chart" style="width:500px;height:430px;"></div>
+		<div id="curve_chart" style="width:450px;height:400px;border:solid 2px;"></div>
 		</div>
       </div>
 	  <div class="col-sm-7 divs">
@@ -140,25 +144,29 @@
 	  <h4 style="padding-top:7px;">Amount spent on particular project in given timespan</h4>
 	  </div>
 	  <div class="charts">
-		<div style="text-align:center;" id="details">
-			<label><h4>Select View :</h4></label>&nbsp;&nbsp;&nbsp;
-			<div class="radio-inline">
-				<label><input type="radio" name="optradio" style="padding-top:2px;"><h5>Option 1</h5></label>
-			</div>
-			<div class="radio-inline">
-				<label><input type="radio" name="optradio"><h5>Option 2</h5></label>
+		<div class="row" style="padding:10px;">
+			<div class="col-sm-12">
+			Select the view options :&nbsp;
+			<label class="radio-inline">
+				<input type="radio" name="mradio1" id="radio1" onclick="radioChange(event)" value="overview" checked="true">Spending Flow
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="mradio1" id="radio2" onclick="radioChange(event)" value="details">Details of spending
+			</label>
 			</div>
 		</div>
-		<div style="height:30px;" class="row" >
+		<div style="height:30px;" class="row" style="padding-top:5px;">
 			<div class="col-sm-7">
-			<label>from:</label>
-			<input type="text" id="from" name="from"><label for="to">to:</label>
-			<input type="text" id="to" name="to">
+			<label>From :</label>
+			<input type="text" id="from" name="from" Style="width:100px;"><label for="to">To :</label>
+			<input type="text" id="to" name="to" Style="width:100px;">
+			
 			</div>
 			<div class="col-sm-5">
-			Project : <select id="target" onchange="clickMe()" style="width:200px;">
+			Project : <select id="target" onchange="clickMe(event)" style="width:200px;">
+			<option value="projects">All Projects</option>
+			</select>
 			</div>
-		</select>
 		</div>
 		<div style="text-align:center;" class="row">
 		<div class="col-sm-12">
@@ -166,6 +174,7 @@
 		<div id="curve_chart1" class="s-charts" style="margin-left:20px;"></div>
 		</div>
 		</div>
+	</div>
 	</div>
 	</div>
 </body>

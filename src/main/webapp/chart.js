@@ -1,5 +1,5 @@
-var jresp,data,jresp1,query,start,end,p_name,grp;
-var amounts;
+var jresp,data,jresp1,query,start,end,p_name,grp,query1;
+var amounts,s,e;
 google.charts.load("current", {packages:["corechart"]});
 var myDiv,myDiv1;
 
@@ -19,7 +19,6 @@ myDiv= document.getElementById("loading");
 myDiv1= document.getElementById("main");
 show();
 //alert("in chart js");
-//createQuery();
 $( "#from" ).datepicker({
       defaultDate: "+1w",
       changeMonth: true,
@@ -41,6 +40,7 @@ $( "#to" ).datepicker({
       }
 });
 setPicker();
+createQuery();
 console.log("back");
 var http = new XMLHttpRequest();
 http.open("GET", "report", true);
@@ -106,7 +106,13 @@ function drawChart() {
 		createQuery();
 }
 
-function clickMe(){
+function clickMe(e){
+	//alert(e.target.value);
+	createQuery();
+}
+
+function radioChange(e){
+	//alert(e.target.value);
 	createQuery();
 }
 
@@ -117,23 +123,33 @@ $('#to').datepicker({ dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date(20
 }
 
 
-function createQuery()
+function createQuery(e)
 {
 	init();
-	//alert("query");
-	var s = $("#from").val();
-	s = s.substring(6,s.length)+"-"+s.substring(0,2)+"-"+s.substring(3,5);
-	//alert(s);
-	var e = $("#to").val();
-	e = e.substring(6,e.length)+"-"+e.substring(0,2)+"-"+e.substring(3,5);
-	start+="TIMESTAMP('"+s+"')";
-	end+="TIMESTAMP('"+e+"')";
-	p_name+="'"+document.getElementById('target').value+"'";
-	query+=start+end+p_name+grp;
-	loadData();
+	var radio_val;
+	var radio1=document.getElementById("radio1");
+	var radio2=document.getElementById("radio2");
+	
+	if(radio1.checked)
+	radio_val=radio1.value;
+	if(radio2.checked)
+	radio_val=radio2.value;
+	
+	//alert(radio_val);
+		
+	if(radio_val=="overview")
+	{
+		init1();
+	}
+	else
+	{
+		init2();
+	}
+
+	loadData(radio_val);
 }
 
-function loadData(){
+function loadData(radio_val){
 	//alert(query);
 	var http = new XMLHttpRequest();
 	http.open("GET", "query?query="+query, true);
@@ -141,13 +157,13 @@ function loadData(){
 	http.onreadystatechange = function() {//Call a function when the state changes.
 		if(http.readyState == 4 && http.status == 200) {
 				jresp1 = JSON.parse(http.responseText);
-				drawChart1();
+				drawChart1(radio_val);
 		}
 	}
 	http.send();
 }
 
-function drawChart1() {
+function drawChart1(radio_val) {
         
 		data = new google.visualization.DataTable();
 		data.addColumn('string', 'Project Name');
@@ -169,7 +185,16 @@ function drawChart1() {
           legend: { position: 'bottom' },
         };
 
-        var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart1'));
+        var chart;
+		
+		if(radio_val=="overview")
+		{
+			chart = new google.visualization.LineChart(document.getElementById('curve_chart1'));
+		}
+		else
+		{
+			chart = new google.visualization.ColumnChart(document.getElementById('curve_chart1'));
+		}
 
         chart.draw(data, options);
 }
@@ -184,7 +209,96 @@ end = " and _PARTITIONTIME < ";
 
 p_name = " and project.name = ";
 
-grp =" group by product"
+grp1 =" group by product";
+
+grp2 = " group by t";
+
+s = $("#from").val();
+//alert(s);
+s = s.substring(6,s.length)+"-"+s.substring(0,2)+"-"+s.substring(3,5);
+e = $("#to").val();
+e = e.substring(6,e.length)+"-"+e.substring(0,2)+"-"+e.substring(3,5);
+start+="TIMESTAMP('"+s+"')";
+end+="TIMESTAMP('"+e+"')";
+
 return;
 }
+
+function init1()
+{
+	target_val=document.getElementById("target").value;
+	
+	var d1 = new Date(s);
+	var d2 = new Date(e);
+	
+	//alert(s);
+	
+	diff = new Date(
+    d2.getFullYear()-d1.getFullYear(), 
+    d2.getMonth()-d1.getMonth(), 
+    d2.getDate()-d1.getDate()
+	);
+	
+	if(diff.getYear()<1)
+	{
+			if(diff.getMonth()<1)
+			{
+					if(diff.getDate()<7)
+					{
+						//alert("its days");
+						query = "SELECT sum(cost) FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
+					}
+					else
+					{
+						//alert("its weeks");
+						query = "SELECT sum(cost), week(_PARTITIONTIME) as t FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
+					}
+			}
+			else
+			{
+				//alert("its months");
+				query = "SELECT sum(cost), month(_PARTITIONTIME) as t FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
+			}
+	}
+	else
+	{
+		//alert("its years");
+		query = "SELECT sum(cost), year(_PARTITIONTIME) as t FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
+	}
+	
+	if(target_val!="projects")
+	{
+		p_name+="'"+document.getElementById('target').value+"'";
+		query+=start+end+p_name+grp2;
+		alert(query);
+	}
+	else
+	{
+		query+=start+end+grp2;
+		alert(query);
+	}
+
+return;
+}
+
+function init2()
+{
+	//alert("init 2");
+	target_val=document.getElementById("target").value;
+	if(target_val!="projects")
+	{
+		query = "SELECT sum(cost), product FROM `billing-167908.billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
+		p_name+="'"+document.getElementById('target').value+"'";
+		query+=start+end+p_name+grp1;
+		alert(query);
+	}
+	else
+	{
+		query+=start+end+grp1;
+		alert(query);
+	}
+return;
+}
+
+
 
