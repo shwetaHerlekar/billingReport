@@ -251,7 +251,7 @@ function init1()
 					else
 					{
 						//alert("its weeks");
-						query = "SELECT sum(cost), week(_PARTITIONTIME) as t FROM `billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8`";
+						query = "SELECT sum(cost), week(_PARTITIONTIME) as t FROM [billing-167908:billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8]";
 					}
 			}
 			else
