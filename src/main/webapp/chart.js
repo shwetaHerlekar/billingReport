@@ -2,6 +2,7 @@ var jresp,data,jresp1,query,start,end,p_name,grp,query1;
 var amounts,s,e;
 google.charts.load("current", {packages:["corechart"]});
 var myDiv,myDiv1;
+var flag="false";
 
 show = function(){
 		myDiv1.style.display = "none";
@@ -246,6 +247,7 @@ function init1()
 					if(diff.getDate()<7)
 					{
 						//alert("its days");
+						flag="true";
 						query = "SELECT sum(cost) FROM [billing-167908:billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8]";
 					}
 					else
@@ -269,13 +271,17 @@ function init1()
 	if(target_val!="projects")
 	{
 		p_name+="'"+document.getElementById('target').value+"'";
-		query+=start+end+p_name+grp2;
-		alert(query);
+		query+=start+end+p_name;
+		if(flag!="true")
+		{
+			query+=grp2;
+		}
+		//alert(query);
 	}
 	else
 	{
 		query+=start+end+grp2;
-		alert(query);
+		//alert(query);
 	}
 
 return;
@@ -290,12 +296,12 @@ function init2()
 		query = "SELECT sum(cost), product FROM [billing-167908:billing_stats.gcp_billing_export_00C10C_FC4CCD_E9F6D8]";
 		p_name+="'"+document.getElementById('target').value+"'";
 		query+=start+end+p_name+grp1;
-		alert(query);
+		//alert(query);
 	}
 	else
 	{
 		query+=start+end+grp1;
-		alert(query);
+		//alert(query);
 	}
 return;
 }
