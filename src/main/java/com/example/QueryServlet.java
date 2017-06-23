@@ -30,7 +30,7 @@ public class QueryServlet extends HttpServlet {
         QueryJobConfiguration.newBuilder(val)
             // Use standard SQL syntax for queries.
             // See: https://cloud.google.com/bigquery/sql-reference/
-            .setUseLegacySql(false)
+            .setUseLegacySql(true)
             .build();
                         // Create a job ID so that we can safely retry.
                         JobId jobId = JobId.of(UUID.randomUUID().toString());
