@@ -275,12 +275,18 @@ function init1()
 		if(flag!="true")
 		{
 			query+=grp2;
+			flag="false";
 		}
 		//alert(query);
 	}
 	else
 	{
-		query+=start+end+grp2;
+		query+=start+end;
+		if(flag!="true")
+		{
+			query+=grp2;
+			flag="false";
+		}
 		//alert(query);
 	}
 
